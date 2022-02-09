@@ -15,12 +15,39 @@ pipeline {
           }
         }
 
+        stage('jobs') {
+          steps {
+            sh 'echo "uter"'
+          }
+        }
+
+        stage('git-checkout') {
+          steps {
+            ws(dir: '/tmp') {
+              git(url: 'https://github.com/rajneeshlamba88/jenkins-blueocean.git', branch: 'main', poll: true)
+            }
+
+            sh 'echo "${WORKSPACE}"'
+          }
+        }
+
       }
     }
 
     stage('Widget Deploy') {
-      steps {
-        sh 'echo "this is for widget"'
+      parallel {
+        stage('Widget Deploy') {
+          steps {
+            sh 'echo "this is for widget"'
+          }
+        }
+
+        stage('sub-job-sub') {
+          steps {
+            sh 'echo "test"'
+          }
+        }
+
       }
     }
 
