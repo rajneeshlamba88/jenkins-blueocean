@@ -23,10 +23,7 @@ pipeline {
 
         stage('git-checkout') {
           steps {
-            ws(dir: '/tmp') {
-              git(url: 'https://github.com/rajneeshlamba88/jenkins-blueocean.git', branch: 'main', poll: true)
-            }
-
+            ws(dir: '/tmp')
             sh 'echo "${WORKSPACE}"'
           }
         }
