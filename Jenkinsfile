@@ -2,8 +2,19 @@ pipeline {
   agent any
   stages {
     stage('Widget') {
-      steps {
-        sh 'echo "Deploy Widget"'
+      parallel {
+        stage('Widget') {
+          steps {
+            sh 'echo "Deploy Widget"'
+          }
+        }
+
+        stage('sub-job') {
+          steps {
+            sh 'echo "this is sub"'
+          }
+        }
+
       }
     }
 
